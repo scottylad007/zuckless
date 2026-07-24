@@ -1,5 +1,5 @@
 /*
- * Facebook feed removal — pure CSS, no DOM mutation.
+ * Facebook feed removal. Pure CSS, no DOM mutation.
  * Facebook's markup uses obfuscated class names, but ARIA roles and labels
  * are stable accessibility hooks, so we target those.
  *

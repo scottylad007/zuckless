@@ -1,7 +1,7 @@
 /*
  * Twitter/X reply removal.
  * twitter.js identifies the focal (original) tweet on /status/ pages and tags
- * everything below it — replies, "Discover more", the reply composer — with
+ * everything below it (replies, "Discover more", the reply composer) with
  * data-fbr-hide. The focal tweet and everything inside it (quote tweets,
  * photos, videos) is never touched.
  *

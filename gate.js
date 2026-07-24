@@ -3,8 +3,8 @@
  *
  * Hiding CSS is active by default (so blocked content never flashes on
  * screen). When a blocker is toggled OFF in the popup, the corresponding
- * token is added to <html data-fbr-allow="…">, and every CSS rule — all
- * written as `html:not([data-fbr-allow~="token"]) …` — stops applying
+ * token is added to <html data-fbr-allow="…">, and every CSS rule (all
+ * written as `html:not([data-fbr-allow~="token"]) …`) stops applying
  * instantly. Toggling works live, no page reload needed.
  *
  * The only thing this ever touches on the page is a data attribute on

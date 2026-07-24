@@ -4,8 +4,8 @@
 
 Zuckless is a tiny Chrome extension that removes the addictive bits of your
 favorite sites while leaving the useful bits alone. Buy that couch on
-Marketplace, message your friends, watch your videos — without getting pulled
-into feeds, comment wars, and reply threads.
+Marketplace, message your friends, watch your videos, all without getting
+pulled into feeds, comment wars, and reply threads.
 
 🌐 **[zuckless.app](https://zuckless.app)**
 
@@ -16,10 +16,10 @@ into feeds, comment wars, and reply threads.
 | 🙈 **Facebook Social Feed** | The feed is gone everywhere, and facebook.com drops you straight into Marketplace instead of the doomscroll. Marketplace and Messages work exactly like normal. |
 | 📸 **Instagram Comments** | Comment threads, "View all N comments" links, and the comment box disappear. Photos, carousels, reels, and stories stay. |
 | ▶️ **YouTube Comments** | The comment section under videos (and on Shorts) is gone. Just watch the video. |
-| 🐦 **Twitter Replies** | Open a post on X and see *the post* — with its quote tweet, photos, and video — not the reply brawl underneath it. |
+| 🐦 **Twitter Replies** | Open a post on X and see the post itself, with its quote tweet, photos, and video, not the reply brawl underneath it. |
 
 Every blocker has its own on/off switch in the popup (click the toolbar
-icon). Flips apply **instantly** to open tabs — no reload needed. Everything
+icon). Flips apply **instantly** to open tabs, no reload needed. Everything
 defaults to blocked; you opt back in when you want.
 
 ## Install
@@ -35,25 +35,25 @@ defaults to blocked; you opt back in when you want.
 4. Click **Load unpacked** and pick the cloned folder.
 5. Pin the icon, click it, and choose your blockers.
 
-*(Chrome Web Store listing coming soon — watch
+*(Chrome Web Store listing coming soon. Watch
 [zuckless.app](https://zuckless.app) for the launch.)*
 
 ## Privacy
 
 Zuckless collects **nothing**. No analytics, no tracking, no network
-requests of its own, no data leaving your browser — ever. Your toggle
+requests of its own, and no data ever leaves your browser. Your toggle
 settings sync through your own Chrome profile (`chrome.storage.sync`) and
 that's it. The only permissions it asks for are the ones the features
-require: `declarativeNetRequest` + facebook.com host access (for the
+require: `declarativeNetRequest` plus facebook.com host access (for the
 Marketplace redirect) and `storage` (for the toggles).
 
 ## How it works
 
-Zuckless is deliberately gentle — it hides things with CSS instead of
+Zuckless is deliberately gentle. It hides things with CSS instead of
 ripping pages apart, so the sites keep working exactly as designed:
 
 - **The Facebook redirect** happens at the network layer with
-  `declarativeNetRequest` static rules ([rules.json](rules.json)) — the
+  `declarativeNetRequest` static rules ([rules.json](rules.json)); the
   browser rewrites the request before it's even sent. Facebook is a
   single-page app, so a small script ([facebook.js](facebook.js)) also
   watches the URL (read-only) and steers client-side navigations to
@@ -65,18 +65,19 @@ ripping pages apart, so the sites keep working exactly as designed:
   first paint (no flash), and un-hiding is instant.
 - **Facebook** targets stable accessibility hooks (`role="feed"`, ARIA
   labels). **YouTube** uses its semantic elements (`ytd-comments#comments`
-  and friends) — pure CSS, no scripting at all.
+  and friends) with pure CSS, no scripting at all.
 - **Instagram** has obfuscated, ever-changing class names, so
-  [instagram.js](instagram.js) recognizes comment UI *structurally* (list
-  items containing a profile link + timestamp — always true for comments,
-  never for photo carousels) and tags it for the CSS to hide.
+  [instagram.js](instagram.js) recognizes comment UI structurally: list
+  items containing a profile link plus a timestamp, which is always true
+  for comments and never for photo carousels. Matches get tagged for the
+  CSS to hide.
 - **Twitter/X** ([twitter.js](twitter.js)) finds the focal tweet on a
   /status/ page via its self-referencing status link and hides every cell
-  below it — replies, the reply box, "Discover more" — while the tweet
+  below it (replies, the reply box, "Discover more") while the tweet
   itself, its quote tweet, and the thread above it stay put.
 
-The scanners only *read* the page and set a `data-` attribute on matches —
-no DOM removal, no event interception, no network tampering.
+The scanners only read the page and set a `data-` attribute on matches.
+No DOM removal, no event interception, no network tampering.
 
 ## Project layout
 
@@ -96,13 +97,13 @@ no DOM removal, no event interception, no network tampering.
 ## Good to know
 
 - A few cosmetic selectors match English UI strings (Facebook's "Stories" /
-  "Reels" labels, Instagram's "View all N comments"). The core blocking —
-  Facebook's `role="feed"`, Instagram's structural matching, all of YouTube
-  and Twitter — is language-independent.
+  "Reels" labels, Instagram's "View all N comments"). The core blocking
+  (Facebook's `role="feed"`, Instagram's structural matching, all of
+  YouTube and Twitter) is language-independent.
 - On Instagram post pages the caption is structurally part of the comment
   list, so it hides along with the comments there; feed captions stay.
 - Sites reshuffle their markup now and then. If something sneaks through,
-  [open an issue](../../issues) — selector fixes are usually one-liners.
+  [open an issue](../../issues) and it's usually a one-line selector fix.
 
 ## Contributing
 
@@ -115,5 +116,5 @@ mutate; and every new blocker gets a toggle.
 
 ---
 
-Made with ❤️ and a healthy distaste for infinite scroll —
+Made with ❤️ and a healthy distaste for provocative algorithms.
 [zuckless.app](https://zuckless.app)

@@ -1,5 +1,5 @@
 /*
- * YouTube comment removal — pure CSS, no DOM mutation.
+ * YouTube comment removal. Pure CSS, no DOM mutation.
  * Selectors verified against the live watch page. YouTube uses semantic
  * custom elements with stable ids, so CSS alone is sufficient here.
  *

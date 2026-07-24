@@ -4,7 +4,7 @@
  * in rules.json never fires for those. This script watches for in-page
  * navigations to feed surfaces and sends the user to Marketplace instead.
  *
- * It is intentionally passive — it never touches Facebook's DOM, network
+ * It is intentionally passive: it never touches Facebook's DOM, network
  * requests, or history internals. It only reads location and, when a blocked
  * path is hit, performs a normal top-level navigation.
  */

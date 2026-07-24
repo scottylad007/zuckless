@@ -3,8 +3,8 @@
  *
  * On tweet detail pages (/<user>/status/<id>) this hides everything below the
  * focal tweet: replies, the reply composer, and "Discover more" filler. The
- * focal tweet itself — including any quote tweet, photos, or video inside
- * it — is never touched, and ancestor tweets (the thread above a reply) stay
+ * focal tweet itself (including any quote tweet, photos, or video inside
+ * it) is never touched, and ancestor tweets, the thread above a reply, stay
  * visible for context. Timelines, search, profiles, etc. are left alone.
  *
  * Like the Instagram scanner, this only reads the DOM and toggles one data
@@ -13,7 +13,7 @@
  *
  * Structure notes (verified against the live site):
  *  - Logged in, tweets sit in virtualized div[data-testid="cellInnerDiv"]
- *    cells positioned with translateY — visual order, not DOM order, so
+ *    cells positioned with translateY. Visual order, not DOM order, so
  *    cells are compared by translateY when available.
  *  - Logged out, there are no testids; replies are plain <article>s after
  *    the focal one in natural flow, so document order is used as fallback.
@@ -57,7 +57,7 @@
   function scan() {
     const m = STATUS_RE.exec(location.pathname);
     if (!m) {
-      untagAll(); // left the tweet page (SPA nav) — restore recycled nodes
+      untagAll(); // left the tweet page (SPA nav), restore recycled nodes
       return;
     }
     const focalId = m[1];

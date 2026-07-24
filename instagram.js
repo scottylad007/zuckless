@@ -4,12 +4,12 @@
  * Instagram's class names are obfuscated and churn constantly, so instead of
  * guessing classes this identifies comment UI structurally and tags it with a
  * data attribute; instagram.css does the actual hiding (and the popup toggle
- * can un-hide everything instantly via the CSS gate — tags are never removed,
+ * can un-hide everything instantly via the CSS gate; tags are never removed,
  * only the gate changes).
  *
  * Deliberately gentle on the page:
  *   - Read-only DOM queries plus setting one data attribute on matched nodes.
- *     Foreign data attributes are ignored by React — nothing else is mutated.
+ *     Foreign data attributes are ignored by React, and nothing else is mutated.
  *   - Scans are debounced behind a MutationObserver, so cost stays negligible.
  *   - Media (photos, carousels, videos, stories) is never matched: comment
  *     lists are recognized by containing a profile link + relative timestamp
@@ -36,7 +36,7 @@
   }
 
   // A ul is a comment/caption list if a list item inside it carries both a
-  // relative timestamp and a profile link — true for every comment thread,
+  // relative timestamp and a profile link, true for every comment thread and
   // never true for image carousels (ul/li without time) or nav lists.
   function isCommentList(ul) {
     for (const li of ul.querySelectorAll(":scope li")) {
@@ -67,7 +67,7 @@
         }
       }
 
-      // 3. Comment (speech-bubble) buttons under posts and on the reels rail —
+      // 3. Comment (speech-bubble) buttons under posts and on the reels rail;
       // they only open the comment UI we're hiding, so hide them too.
       for (const svg of region.querySelectorAll('svg[aria-label="Comment"]')) {
         const btn = svg.closest('[role="button"], button');
