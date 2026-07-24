@@ -14,13 +14,15 @@ pulled into feeds, comment wars, and reply threads.
 | Toggle | What happens |
 |---|---|
 | 🙈 **Facebook Social Feed** | The feed is gone everywhere, and facebook.com drops you straight into Marketplace instead of the doomscroll. Marketplace and Messages work exactly like normal. |
+| 💬 **Facebook Comments** | For people who keep the feed: hides comments, the comment box, and "View more comments" links on posts. **Off by default**; flip it on if you want a comment-free Facebook. |
 | 📸 **Instagram Comments** | Comment threads, "View all N comments" links, and the comment box disappear. Photos, carousels, reels, and stories stay. |
 | ▶️ **YouTube Comments** | The comment section under videos (and on Shorts) is gone. Just watch the video. |
 | 🐦 **Twitter Replies** | Open a post on X and see the post itself, with its quote tweet, photos, and video, not the reply brawl underneath it. |
 
 Every blocker has its own on/off switch in the popup (click the toolbar
 icon). Flips apply **instantly** to open tabs, no reload needed. Everything
-defaults to blocked; you opt back in when you want.
+defaults to blocked except Facebook Comments, which is opt-in for people who
+keep the social feed around.
 
 ## Install
 
@@ -64,8 +66,11 @@ ripping pages apart, so the sites keep working exactly as designed:
   `data-fbr-allow` attribute on `<html>`. Blocked content is hidden from the
   first paint (no flash), and un-hiding is instant.
 - **Facebook** targets stable accessibility hooks (`role="feed"`, ARIA
-  labels). **YouTube** uses its semantic elements (`ytd-comments#comments`
-  and friends) with pure CSS, no scripting at all.
+  labels). The opt-in comment blocker uses the same idea: Facebook marks
+  every comment as `role="article"` with a "Comment by ..." label, and a
+  small text scanner tags the "View more comments" links and counts that
+  carry no stable attributes. **YouTube** uses its semantic elements
+  (`ytd-comments#comments` and friends) with pure CSS, no scripting at all.
 - **Instagram** has obfuscated, ever-changing class names, so
   [instagram.js](instagram.js) recognizes comment UI structurally: list
   items containing a profile link plus a timestamp, which is always true

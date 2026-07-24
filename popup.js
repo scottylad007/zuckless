@@ -1,5 +1,6 @@
 const DEFAULTS = {
   hideFbFeed: true,
+  hideFbComments: false,
   hideIgComments: true,
   hideYtComments: true,
   hideTwReplies: true

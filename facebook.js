@@ -41,6 +41,55 @@
     enforce();
   });
 
+  // Separate opt-in toggle (OFF by default): hide comments on posts for
+  // people who keep the social feed. Most comment UI is caught by pure CSS
+  // (facebook.css), but "View more comments" links and comment counts have
+  // no stable attributes, so a scanner text-matches and tags them.
+  window.__fbrGate("hideFbComments", "fbc", null, { optIn: true });
+
+  const COMMENT_TEXT_RE =
+    /^(view|see) ([\d,]+ )?(more |previous |all )?(comments?|repl(y|ies))$|^[\d,.]+[KM]? comments?$/i;
+
+  function scanComments() {
+    for (const el of document.querySelectorAll(
+      'div[role="button"], span[role="button"], span[dir="auto"]'
+    )) {
+      if (
+        !el.hasAttribute("data-fbr-fbc") &&
+        el.childElementCount <= 2 &&
+        el.textContent.length < 40 &&
+        COMMENT_TEXT_RE.test(el.textContent.trim())
+      ) {
+        el.setAttribute("data-fbr-fbc", "");
+      }
+    }
+  }
+
+  let pendingScan = null;
+  function scheduleCommentScan() {
+    if (pendingScan !== null) return;
+    pendingScan = setTimeout(() => {
+      pendingScan = null;
+      scanComments();
+    }, 300);
+  }
+
+  function startCommentScanner() {
+    scanComments();
+    new MutationObserver(scheduleCommentScan).observe(
+      document.documentElement,
+      { childList: true, subtree: true }
+    );
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", startCommentScanner, {
+      once: true
+    });
+  } else {
+    startCommentScanner();
+  }
+
   // Preferred: the Navigation API fires for all SPA route changes.
   if (window.navigation && typeof window.navigation.addEventListener === "function") {
     window.navigation.addEventListener("navigatesuccess", enforce);

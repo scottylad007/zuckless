@@ -1,37 +1,46 @@
 /*
  * Shared settings gate, loaded before each site script.
  *
- * Hiding CSS is active by default (so blocked content never flashes on
- * screen). When a blocker is toggled OFF in the popup, the corresponding
- * token is added to <html data-fbr-allow="…">, and every CSS rule (all
- * written as `html:not([data-fbr-allow~="token"]) …`) stops applying
- * instantly. Toggling works live, no page reload needed.
+ * Two kinds of blockers:
  *
- * The only thing this ever touches on the page is a data attribute on
- * <html>, which page frameworks ignore.
+ * Default-ON (opt-out) blockers hide from the first paint: their CSS rules
+ * are written as `html:not([data-fbr-allow~="token"]) ...`, so content is
+ * hidden until gate.js reads storage; switching the blocker off adds the
+ * token to <html data-fbr-allow> and the rules stop applying instantly.
+ *
+ * Default-OFF (opt-in) blockers work the other way: their CSS rules are
+ * written as `html[data-fbr-deny~="token"] ...`, so nothing is hidden until
+ * the user enables the blocker and the token lands in <html data-fbr-deny>.
+ *
+ * Toggling works live in both directions, no page reload needed. The only
+ * thing this ever touches on the page is a data attribute on <html>, which
+ * page frameworks ignore.
  */
-window.__fbrGate = function (storageKey, token, onChange) {
+window.__fbrGate = function (storageKey, token, onChange, opts) {
   "use strict";
 
+  opts = opts || {};
+  const optIn = !!opts.optIn;
+  const attr = optIn ? "data-fbr-deny" : "data-fbr-allow";
   const root = document.documentElement;
 
   function apply(enabled) {
-    const tokens = (root.getAttribute("data-fbr-allow") || "")
-      .split(/\s+/)
-      .filter(Boolean);
+    const tokens = (root.getAttribute(attr) || "").split(/\s+/).filter(Boolean);
     const idx = tokens.indexOf(token);
-    if (enabled && idx !== -1) tokens.splice(idx, 1);
-    if (!enabled && idx === -1) tokens.push(token);
-    if (tokens.length) root.setAttribute("data-fbr-allow", tokens.join(" "));
-    else root.removeAttribute("data-fbr-allow");
+    // opt-out: token present while DISABLED; opt-in: token present while ENABLED
+    const wantToken = optIn ? enabled : !enabled;
+    if (wantToken && idx === -1) tokens.push(token);
+    if (!wantToken && idx !== -1) tokens.splice(idx, 1);
+    if (tokens.length) root.setAttribute(attr, tokens.join(" "));
+    else root.removeAttribute(attr);
     if (onChange) onChange(enabled);
   }
 
-  chrome.storage.sync.get({ [storageKey]: true }, (v) => apply(v[storageKey]));
+  chrome.storage.sync.get({ [storageKey]: !optIn }, (v) => apply(!!v[storageKey]));
 
   chrome.storage.onChanged.addListener((changes, area) => {
     if (area === "sync" && changes[storageKey]) {
-      apply(changes[storageKey].newValue !== false);
+      apply(!!changes[storageKey].newValue);
     }
   });
 };

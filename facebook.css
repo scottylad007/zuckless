@@ -21,3 +21,23 @@ html:not([data-fbr-allow~="fb"]) div[aria-label="Reels"],
 html:not([data-fbr-allow~="fb"]) div[aria-label="Create a post"] {
   display: none !important;
 }
+
+/*
+ * Facebook Comments (separate opt-in toggle, OFF by default).
+ * For people who keep the social feed but want it comment-free. Facebook
+ * marks each comment thread item as role="article" with a descriptive
+ * aria-label, which is the most stable hook it exposes.
+ */
+
+/* Individual comments and replies under posts */
+html[data-fbr-deny~="fbc"] div[role="article"][aria-label^="Comment by"],
+html[data-fbr-deny~="fbc"] div[role="article"][aria-label^="Reply by"],
+/* The "Write a comment..." composer */
+html[data-fbr-deny~="fbc"] div[aria-label^="Write a comment"],
+html[data-fbr-deny~="fbc"] form[aria-label^="Write a comment"],
+/* The Comment button in the post action bar */
+html[data-fbr-deny~="fbc"] div[aria-label="Leave a comment"],
+/* Text-matched bits tagged by facebook.js ("View more comments", counts) */
+html[data-fbr-deny~="fbc"] [data-fbr-fbc] {
+  display: none !important;
+}
