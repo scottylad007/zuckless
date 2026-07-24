@@ -3,3 +3,6 @@ _metadata/
 
 # macOS
 .DS_Store
+
+# Build output
+dist/
