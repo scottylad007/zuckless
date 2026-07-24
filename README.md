@@ -35,7 +35,8 @@ defaults to blocked; you opt back in when you want.
 4. Click **Load unpacked** and pick the cloned folder.
 5. Pin the icon, click it, and choose your blockers.
 
-*(Chrome Web Store listing coming soon.)*
+*(Chrome Web Store listing coming soon — watch
+[zuckless.app](https://zuckless.app) for the launch.)*
 
 ## Privacy
 
@@ -111,3 +112,8 @@ mutate; and every new blocker gets a toggle.
 ## License
 
 [MIT](LICENSE)
+
+---
+
+Made with ❤️ and a healthy distaste for infinite scroll —
+[zuckless.app](https://zuckless.app)
