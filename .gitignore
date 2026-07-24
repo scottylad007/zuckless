@@ -6,3 +6,6 @@ _metadata/
 
 # Build output
 dist/
+
+# Raw screen captures (contain personal info; only processed versions get committed)
+store-assets/Screenshot 20*.png
