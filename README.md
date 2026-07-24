@@ -110,6 +110,13 @@ No DOM removal, no event interception, no network tampering.
 - Sites reshuffle their markup now and then. If something sneaks through,
   [open an issue](../../issues) and it's usually a one-line selector fix.
 
+## Support the project
+
+Zuckless is free, open source, and collects nothing, and it'll stay that
+way. If it bought you back some hours of your life, you can
+[sponsor the project on GitHub](https://github.com/sponsors/scottylad007).
+Every bit goes toward keeping the blockers ahead of the markup reshuffles.
+
 ## Contributing
 
 Issues and PRs welcome. Keep the philosophy: hide, don't break; read, don't
