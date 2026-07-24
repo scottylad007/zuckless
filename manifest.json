@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Zuckless",
   "version": "1.3.0",
-  "description": "Hides the Facebook feed (redirecting home to Marketplace), Instagram comments, YouTube comments, and Twitter/X replies. Each blocker can be toggled in the popup. zuckless.app",
+  "description": "Hide the Facebook feed (home opens Marketplace), Facebook, Instagram and YouTube comments, and X replies. Toggle each. zuckless.app",
   "permissions": ["declarativeNetRequest", "storage"],
   "host_permissions": [
     "*://facebook.com/*",
