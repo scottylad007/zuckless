@@ -1,0 +1,23 @@
+/*
+ * Facebook feed removal — pure CSS, no DOM mutation.
+ * Facebook's markup uses obfuscated class names, but ARIA roles and labels
+ * are stable accessibility hooks, so we target those.
+ *
+ * Marketplace and Messages do not use role="feed", so they are unaffected.
+ *
+ * Every rule is gated on the "Facebook Social Feed" toggle: when the blocker
+ * is switched off, gate.js adds the "fb" token to <html data-fbr-allow> and
+ * these rules stop applying.
+ */
+
+/* News feed, group feeds, page feeds, profile timelines */
+html:not([data-fbr-allow~="fb"]) div[role="feed"],
+/* Stories tray at the top of the home page */
+html:not([data-fbr-allow~="fb"]) div[aria-label="Stories"],
+html:not([data-fbr-allow~="fb"]) div[aria-label="Stories tray"],
+/* Reels shelf */
+html:not([data-fbr-allow~="fb"]) div[aria-label="Reels"],
+/* "Create a post" composer shown above the feed */
+html:not([data-fbr-allow~="fb"]) div[aria-label="Create a post"] {
+  display: none !important;
+}

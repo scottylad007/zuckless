@@ -1,0 +1,63 @@
+{
+  "manifest_version": 3,
+  "name": "Zuckless",
+  "version": "1.2.0",
+  "description": "Hides the Facebook feed (redirecting home to Marketplace), Instagram comments, YouTube comments, and Twitter/X replies. Each blocker can be toggled in the popup. zuckless.app",
+  "permissions": ["declarativeNetRequest", "storage"],
+  "host_permissions": [
+    "*://facebook.com/*",
+    "*://www.facebook.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Zuckless",
+    "default_popup": "popup.html"
+  },
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "redirect_rules",
+        "enabled": true,
+        "path": "rules.json"
+      }
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://facebook.com/*", "*://www.facebook.com/*"],
+      "css": ["facebook.css"],
+      "js": ["gate.js", "facebook.js"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["*://instagram.com/*", "*://www.instagram.com/*"],
+      "css": ["instagram.css"],
+      "js": ["gate.js", "instagram.js"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["*://www.youtube.com/*"],
+      "css": ["youtube.css"],
+      "js": ["gate.js", "youtube.js"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://x.com/*",
+        "*://www.x.com/*",
+        "*://twitter.com/*",
+        "*://www.twitter.com/*"
+      ],
+      "css": ["twitter.css"],
+      "js": ["gate.js", "twitter.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

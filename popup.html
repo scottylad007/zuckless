@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <h1>Zuckless</h1>
+    <p>On = hidden. Changes apply instantly.</p>
+  </header>
+
+  <label class="row">
+    <span class="text">
+      <span class="name">Facebook Social Feed</span>
+      <span class="desc">Hide the feed &amp; send home to Marketplace</span>
+    </span>
+    <span class="switch">
+      <input type="checkbox" id="hideFbFeed">
+      <span class="slider"></span>
+    </span>
+  </label>
+
+  <label class="row">
+    <span class="text">
+      <span class="name">Instagram Comments</span>
+      <span class="desc">Hide comments; photos &amp; stories stay</span>
+    </span>
+    <span class="switch">
+      <input type="checkbox" id="hideIgComments">
+      <span class="slider"></span>
+    </span>
+  </label>
+
+  <label class="row">
+    <span class="text">
+      <span class="name">YouTube Comments</span>
+      <span class="desc">Hide comments under videos &amp; Shorts</span>
+    </span>
+    <span class="switch">
+      <input type="checkbox" id="hideYtComments">
+      <span class="slider"></span>
+    </span>
+  </label>
+
+  <label class="row">
+    <span class="text">
+      <span class="name">Twitter Replies</span>
+      <span class="desc">Hide replies under posts; the post itself stays</span>
+    </span>
+    <span class="switch">
+      <input type="checkbox" id="hideTwReplies">
+      <span class="slider"></span>
+    </span>
+  </label>
+
+  <footer>
+    <a href="https://zuckless.app" target="_blank" rel="noopener">zuckless.app</a>
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>
